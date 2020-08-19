@@ -6,7 +6,10 @@ const apiObj = {
     post: {
         loginClinic: '/loginClinic',
         loginDoctor: '/loginDoctor',
-        create_prescription : '/createPrescription/',
+        /*create_prescription : '/createPrescription/',*/
+        create_doctor : '/createDoctor',
+        assign_doctor_to_clinic : '/assignDoctorToClinic',
+        create_patient : '/createPerson'
     },
     /* =============================== PUT ================================== */
     put: {
@@ -24,6 +27,7 @@ const apiObj = {
         
         all_schedules_by_doctor_id : '/getSchedulesByDoctorId/',
         get_person_with_id : '/getPersonWithId/',
+        get_doctor_with_id : '/getDoctorWithId/',
     }
 }
 export default apiObj

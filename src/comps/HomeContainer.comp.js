@@ -22,7 +22,11 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 
 import InboxIcon from '@material-ui/icons/MoveToInbox'
-import MailIcon from '@material-ui/icons/Mail'
+import PersonIcon from '@material-ui/icons/Person'
+import LocalHospitalIcon from '@material-ui/icons/LocalHospital'
+import PeopleIcon from '@material-ui/icons/People'
+import ScheduleIcon from '@material-ui/icons/Schedule'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 
 import ProfileComp from './Profile.comp'
 import DoctorsComp from './Doctors.comp'
@@ -94,7 +98,7 @@ const HomeContainerComp = ()=>{
 
     return(
         <React.Fragment>
-            <AppBar position="static">
+            <AppBar position="fixed">
                 <Toolbar>
                     <IconButton edge="start" className={classes.menuButton} color="inherit" onClick={showSideBar}>
                         <MenuIcon />
@@ -109,25 +113,25 @@ const HomeContainerComp = ()=>{
                 <Divider />
                 <List>
                     <ListItem button key={'profile'} onClick={ onProfile }> 
-                        <ListItemIcon> <InboxIcon /> </ListItemIcon>
+                        <ListItemIcon> <PersonIcon /> </ListItemIcon>
                         <ListItemText primary='Profile' /> 
                     </ListItem>
                     <Divider />
                     <ListItem button key={'doctors'} onClick={ onDoctors }> 
-                        <ListItemIcon> <InboxIcon /> </ListItemIcon>
+                        <ListItemIcon> <LocalHospitalIcon /> </ListItemIcon>
                         <ListItemText primary='Doctors' /> 
                     </ListItem>
                     <ListItem button key={'patients'} onClick={ onPatients }> 
-                        <ListItemIcon> <InboxIcon /> </ListItemIcon>
+                        <ListItemIcon> <PeopleIcon /> </ListItemIcon>
                         <ListItemText primary='Patients' /> 
                     </ListItem>
                     <ListItem button key={'schedules'} onClick={ onSchedules }> 
-                        <ListItemIcon> <InboxIcon /> </ListItemIcon>
+                        <ListItemIcon> <ScheduleIcon /> </ListItemIcon>
                         <ListItemText primary='Schedules' /> 
                     </ListItem>
                     <Divider />
                     <ListItem button key={'logout'} onClick={ onLogout }> 
-                        <ListItemIcon> <InboxIcon /> </ListItemIcon>
+                        <ListItemIcon> <ExitToAppIcon /> </ListItemIcon>
                         <ListItemText primary='Logout' /> 
                     </ListItem>
                     <Divider />
@@ -136,7 +140,7 @@ const HomeContainerComp = ()=>{
                     </ListItem>
                 </List>
             </Drawer>
-            <div>
+            <div style={{marginTop:'5em'}}>
                 { renderViewComponent(activeViewName) }
             </div>
         </React.Fragment>
