@@ -6,7 +6,7 @@ const apiObj = {
     post: {
         loginClinic: '/loginClinic',
         loginDoctor: '/loginDoctor',
-        /*create_prescription : '/createPrescription/',*/
+        create_prescription : '/createPrescription',
         create_doctor : '/createDoctor',
         assign_doctor_to_clinic : '/assignDoctorToClinic',
         create_patient : '/createPerson'

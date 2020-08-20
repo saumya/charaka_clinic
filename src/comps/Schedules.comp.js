@@ -15,8 +15,18 @@ import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import LinearProgress from '@material-ui/core/LinearProgress'
 
+import List from '@material-ui/core/List'
+import Dialog from '@material-ui/core/Dialog'
+import Slide from '@material-ui/core/Slide'
+
+import ListSchedulesRow2Component from './ListSchedulesRow2.comp'
+import ScheduleDetailView from './ScheduleDetailView.comp'
+
 import { all_schedules_by_doctorId_action } from '../actions'
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="left" ref={ref} {...props} />;
+});
 
 const SchedulesComp = ()=>{
 
@@ -39,9 +49,22 @@ const SchedulesComp = ()=>{
         }
     }
 
+    const [open, setOpen] = useState(false)
+    const [detailsObj, setDetailsObj] = useState({})
+    const handleClose = ()=>setOpen(false)
+    const onDetails = (detailsObj)=>{
+        setDetailsObj( detailsObj )
+        setOpen(true)
+    }
+
     return(
         <React.Fragment>
             <div style={{marginTop:20}} />
+            
+            <Dialog fullScreen open={open} TransitionComponent={Transition}>
+                <ScheduleDetailView handleClose={handleClose} detailsObj={detailsObj} />
+            </Dialog>
+
             <Container maxWidth="sm">
                 <Paper elevation={3} style={{padding:20}}>
                     <form style={{margin:'1em'}} noValidate autoComplete="off">
@@ -85,15 +108,19 @@ const SchedulesComp = ()=>{
             <Container maxWidth="sm">
                 <Paper elevation={3} style={{padding:20}}>
                     {
-                    
+                        /*
                         schedules.map( (schedule)=>(
-                        <div key={schedule.id}>
-                            {/* JSON.stringify(schedule) */}
-                            <div> schedule id-{schedule.id} - {schedule.on_date} - {schedule.is_morning ? "Morning" : "Evening"} - {schedule.isWeb ? 'On Web' : 'In Person'} - Patient id-{schedule.personId} </div>
-                        </div>
-                        ) )
-                        
+                            <div key={schedule.id}>
+                                <div> schedule id-{schedule.id} - {schedule.on_date} - {schedule.is_morning ? "Morning" : "Evening"} - {schedule.isWeb ? 'On Web' : 'In Person'} - Patient id-{schedule.personId} </div>
+                            </div>   
+                        ))
+                        */
                     }
+                    <List component="nav">
+                    {
+                        schedules.map( singleRowData=><ListSchedulesRow2Component key={singleRowData.id} rowData={singleRowData} onDetailsClick={onDetails} /> )
+                    }
+                    </List>
                 </Paper>
                 <LinearProgress color="secondary" variant={appMessages.isAppBusy ? "indeterminate" : "determinate" } value={0} />
             </Container>
