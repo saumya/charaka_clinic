@@ -12,8 +12,6 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 
-//import NavigateNextIcon from '@material-ui/icons/NavigateNext'
-//import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 
 import DialogTitle from '@material-ui/core/DialogTitle'
@@ -36,12 +34,8 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import WritePrescriptionComponent from './WritePrescription.comp'
 
 import { updateSinlgeScheduleForDoctorAction, 
-            getPersonProfileAction } from '../actions'
-/*
-import { updateSinlgeScheduleForDoctorAction, 
             getPersonProfileAction, 
             resetPersonProfileAction } from '../actions'
-*/
 
 
 const useStyles = makeStyles((theme) => ({
@@ -71,19 +65,15 @@ const ScheduleDetailViewComponent = (props)=>{
     const classes = useStyles()
     const dispatch = useDispatch() // React-Redux
     const appMessages = useSelector( state=> state.messages )
-    //const patientDataObj = useSelector( state=> state.patientData )
     const patientDataObj = useSelector( state=> state.clinicData.patientWithId )
 
     const [isWeb, setIsWeb]= useState(props.detailsObj.isWeb)
     const [webTime, setWebTime]= useState(props.detailsObj.web_at_time)
 
     const toggleWebChecked = ()=> setIsWeb( !isWeb )
-    /* const onJoinWebConference = ()=> console.log('onJoinWebConference') */
-    
-    //const onPersonDetailsClick = (personId)=> console.log( 'TODO' )
     const onPersonDetailsClick = (personId)=> dispatch( getPersonProfileAction(personId) )
     const onCloseClick = ()=>{
-        //dispatch( resetPersonProfileAction() )
+        dispatch( resetPersonProfileAction() )
         props.handleClose()
     }
 
@@ -111,9 +101,8 @@ const ScheduleDetailViewComponent = (props)=>{
             
             <AppBar className={classes.appBar}>
                 <Toolbar>
-                <Button color="inherit" onClick={ onCloseClick }>
+                    <Button color="inherit" onClick={ onCloseClick }>
                         <ArrowBackIosIcon />
-                        
                     </Button>
                     <Typography variant="h6" className={classes.title}>
                         Schedule - {props.detailsObj.id}
@@ -135,7 +124,7 @@ const ScheduleDetailViewComponent = (props)=>{
                 {/* <Typography color="textSecondary" gutterBottom> View And Update The Schedule </Typography> */}
                 <Grid container className={classes.root} justify="center" spacing={2}>
                     <Grid key={1} item>
-                        <LinearProgress color="primary" variant={appMessages.isBusy ? "indeterminate" : "determinate" } value={0} />
+                        <LinearProgress color="primary" variant={appMessages.isAppBusy ? "indeterminate" : "determinate" } value={0} />
                         <Paper className={classes.paper} elevation={1}>
                             
                             <DialogContentText> Schedule Id - { props.detailsObj.id } </DialogContentText>
@@ -147,7 +136,7 @@ const ScheduleDetailViewComponent = (props)=>{
                         </Paper>
                     </Grid>
                     <Grid key={2} item>
-                        <LinearProgress color="primary" variant={appMessages.isBusy ? "indeterminate" : "determinate" } value={0} />
+                        <LinearProgress color="primary" variant={appMessages.isAppBusy ? "indeterminate" : "determinate" } value={0} />
                         <Paper className={classes.paper} elevation={1}>
                             <FormGroup>
                                 <FormControlLabel control={<Switch color="primary" onChange={toggleWebChecked} checked={isWeb || false} />} label="Is Web Meeting?" />
@@ -192,7 +181,7 @@ const ScheduleDetailViewComponent = (props)=>{
                 
                 {
                 <Grid item xs>
-                    <LinearProgress color="primary" variant={appMessages.isBusy ? "indeterminate" : "determinate" } value={0} />
+                    <LinearProgress color="primary" variant={appMessages.isAppBusy ? "indeterminate" : "determinate" } value={0} />
                     <Paper style={{ padding:'2em' }} elevation={1}>
                         <Button onClick={ ()=>{onPersonDetailsClick(props.detailsObj.personId)} } color="primary" variant="contained"> Patient </Button>
                         

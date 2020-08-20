@@ -152,7 +152,7 @@ const WritePrescriptionComponent = (props)=>{
                         <Button size="large" variant="contained" color="secondary" onClick={onPrescription}> Prescribe </Button>
                     </CardActions>
                     </div>
-                    <LinearProgress color="secondary" variant={appMessages.isBusy ? "indeterminate" : "determinate" } value={0} />
+                    <LinearProgress color="secondary" variant={appMessages.isAppBusy ? "indeterminate" : "determinate" } value={0} />
                 </Card>
                 
             

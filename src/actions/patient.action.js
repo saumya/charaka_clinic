@@ -74,7 +74,7 @@ export const getPersonProfileAction = personId=>{
 
 const updateSearchedPatient = patient=>({ type: 'UPDATE_SEARCHED_PATIENT', payload: patient })
 
-
+export const resetPersonProfileAction = ()=>({ type: 'UPDATE_SEARCHED_PATIENT', payload: {} })
 
 
 
