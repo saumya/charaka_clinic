@@ -41,6 +41,37 @@ export const createPatient_action = patientObj=>(
 )
 // ============== Create Patient / ==========================================
 
+
+// ============== Get Patient Profile ==========================================
+const call_GetPersonWithId_API = (user_id)=>{
+    const url_1 = ApiObj.endpoint + ApiObj.version 
+                    + ApiObj.get.get_person_with_id + user_id
+    return fetch(url_1)
+}
+export const getPersonProfileAction = personId=>{
+    return function(dispatch){
+        dispatch( changeBusyStatus(true) )
+        call_GetPersonWithId_API( personId ).then(function(success){
+            success.json().then(function(result_data){
+                console.log('call_GetPersonWithId_API : SUCCESS : RESULT')
+                //console.log( result_data )
+                dispatch( updateSearchedPatient(result_data) )
+                //dispatch( updatePatientData(result_data) )
+                dispatch( changeBusyStatus(false) )
+            }).catch(function(error_2){
+                console.log('call_GetPersonWithId_API : SUCCESS : ERROR_2')
+                console.log(error_2)
+                dispatch( changeBusyStatus(false) )
+            })
+        }, function(error){
+            console.log( 'call_GetPersonWithId_API : ERROR' )
+            console.log( error )
+            dispatch( changeBusyStatus(false) )
+        })
+    }
+}
+// ============== Get Patient Profile / ==========================================
+
 const updateSearchedPatient = patient=>({ type: 'UPDATE_SEARCHED_PATIENT', payload: patient })
 
 
