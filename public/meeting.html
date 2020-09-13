@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FindHealth | Consulting</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
+    <!-- <link rel="stylesheet" href="bulma.min.css"> -->
+
+    <script src='https://meet.jit.si/external_api.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/webtorrent@0.108.6/webtorrent.min.js"></script>
+</head>
+<body>
+    
+    <section class="section" id="meet"></section>
+   <!--
+    <section class="section">
+		<h3 class="title"> Send </h3>
+		<h4 class="subtitle"> Select a file to send </h4>
+		<input class="input is-info" id="inputFile" type="file" name="fileupload" value="fileupload" />
+		<textarea class="textarea is-info" id="divInfo" placeholder="Please wait for it." style="width:36em; height:14em; overflow: scroll;"></textarea>
+    </section>
+    -->
+    <section class="section">
+		<h3 class="title"> Get the file </h3>
+		<h4 class="subtitle"> Paste the desired URL below </h4>
+
+		<div class="field has-addons">
+		  <div class="control is-expanded">
+		    <input id="outputFile" class="input is-success" type="text" placeholder="File Url">
+		  </div>
+		  <div class="control">
+		    <button id="btnGet" class="button is-success"> Get it </button>
+		  </div>
+		</div>
+		<div id="divProgressInfo"> Progress </div>
+		<progress id="idProgress" class="progress is-success" value="0.0" max="1"> 0% </progress>
+	</section>
+	
+	<section id="divDownloaded" class="section"></section> 
+
+    <script>
+        (function(){
+
+            //ref: https://jitsi.org/api/
+
+            const jitsiUrl = "https://meet.jit.si/";
+            const u1 = window.location.hash.substr(1);
+            const u2 = u1.substr( jitsiUrl.length );
+            /*
+            console.log('---------------------------');
+            console.log( window.location.hash );
+            console.log( window.location.hash.substr(1) );
+            console.log('room', u2);
+            console.log('---------------------------');
+            */
+            const domain = 'meet.jit.si';
+            const options = {
+                roomName: u2,
+                width: "100%",
+                height: window.innerHeight,
+                parentNode: document.querySelector('#meet')
+            };
+            const api = new JitsiMeetExternalAPI(domain, options);
+            //
+            //
+            
+            // ---------- File Receive ------------
+            const onGet = function(){
+				const client = new WebTorrent()
+				let torrentId = $('#outputFile').val()
+
+				//
+				let inervalId
+				let isDone = false 
+				// onDone
+			  const onDone = function(){ 
+			  	console.log('onDone')
+			  	//onProgress() 
+			  	isDone = true
+			  }
+			  // onDone/
+			  // onProgress
+			  const onProgress = function(torrent){
+			  	
+			  	if(isDone){
+			  		clearInterval(inervalId)
+			  	}
+
+		  		//let a = new Date().toDateString()
+		  		//let a = new Date().toLocaleDateString()
+			  	let sTime = new Date().toLocaleTimeString()
+			  	//
+			  	//console.log( 'torrent.progress', torrent.progress )
+			  	let percentDownloaded = Math.round( torrent.progress*100*100 ) / 100
+			  	let userInfoString = sTime + ' | <strong>' + percentDownloaded + '%</strong> Done'
+			  	//
+			  	$('#idProgress')[0].value = torrent.progress
+			  	//
+			  	//console.log( `onProgress : ${a}` )
+			  	$('#divProgressInfo').html( userInfoString )
+
+			  }
+			  // onProgress/
+				
+				client.add(torrentId, function (torrent) {
+                    /*
+                    let file = torrent.files.find(function (file) {
+                    return file.name.endsWith('.jpg')
+                    })
+                    */
+                    let file = torrent.files[0]
+                    
+                    // show in UI
+                    //file.appendTo('body')
+                    file.appendTo('#divDownloaded')
+                    
+                    // Trigger statistics refresh
+                    torrent.on('done', onDone)
+                    inervalId = setInterval(onProgress, 500, torrent)
+                    onProgress(torrent)
+
+				})// client.add/
+
+            } // onGet/ 
+            $('#btnGet').on('click',onGet);
+            // ---------- File Receive / ---------- 
+            /*
+            // ---------- File Send ---------- 
+            const onFileChange = function(event){
+				console.log('onFileChange')
+				var fileList = event.target.files
+				//console.log(fileList[0])
+
+				const client = new WebTorrent()
+				client.seed(fileList, function(torrent){
+					console.log('Seeding',torrent.magnetURI)
+					$('#divInfo').html( torrent.magnetURI )
+					// Copying to Clipboard
+					navigator.clipboard.writeText( torrent.magnetURI )
+				})
+			}
+            $('#inputFile').on('change', onFileChange)
+            // ---------- File Send/ ---------- 
+            */
+        }())
+    </script>
+</body>
+</html>

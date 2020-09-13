@@ -6,21 +6,24 @@ import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import Container from '@material-ui/core/Container'
 
+import InfoComp from './Info.comp'
+
 const ProfileComp = ()=>{
     const loginData = useSelector( state=>state.loginData )
     return(
         <React.Fragment>
             <div style={{marginTop:20}} />
             {/* JSON.stringify( loginData ) */}
-            <Container maxWidth="sm">
+            <Container maxWidth="md">
                 <Paper style={{padding: 20}}>
-                    <Typography variant="h6"> Id - {loginData.loginUser.id} </Typography>
-                    <Typography variant="h6"> Clinic Name - {loginData.loginUser.group_name} </Typography>
-                    <Typography variant="h6"> User Name - {loginData.loginUser.user_name} </Typography>
-                    <Typography variant="h6"> Password - {loginData.loginUser.user_password} </Typography>
-                    <Typography variant="h6"> Activated On - {loginData.loginUser.activated_on} </Typography>
-                    <Typography variant="h6"> Activated From - {loginData.loginUser.activated_from} </Typography>
-                    <Typography variant="h6"> Activated To - {loginData.loginUser.activated_to} </Typography>
+                    <div style={{fontSize:'3em', color:'#666'}}> Clinic Profile </div>
+                    <InfoComp label='Id' value={loginData.loginUser.id} />
+                    <InfoComp label='Clinic Name' value={loginData.loginUser.group_name} />
+                    <InfoComp label='User Name' value={loginData.loginUser.user_name} />
+                    <InfoComp label='Password' value={loginData.loginUser.user_password} />
+                    <InfoComp label='Activated On' value={loginData.loginUser.activated_on} />
+                    <InfoComp label='Activated From' value={loginData.loginUser.activated_from} />
+                    <InfoComp label='Activated To' value={loginData.loginUser.activated_to} />
                 </Paper>
             </Container>
             

@@ -28,6 +28,7 @@ import PeopleIcon from '@material-ui/icons/People'
 import ScheduleIcon from '@material-ui/icons/Schedule'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 
+import HomeDefaultComp from './HomeDefault.comp'
 import ProfileComp from './Profile.comp'
 import DoctorsComp from './Doctors.comp'
 import PatientsComp from './Patients.comp'
@@ -90,7 +91,7 @@ const HomeContainerComp = ()=>{
             case 'schedules' :
                 return(<SchedulesComp />)
             default :
-                return(<div>Default</div>)
+                return(<HomeDefaultComp />)
 
         }
     }
