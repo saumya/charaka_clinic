@@ -28,11 +28,20 @@ import PeopleIcon from '@material-ui/icons/People'
 import ScheduleIcon from '@material-ui/icons/Schedule'
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import StorefrontIcon from '@material-ui/icons/Storefront'
+import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd'
+
 import HomeDefaultComp from './HomeDefault.comp'
 import ProfileComp from './Profile.comp'
 import DoctorsComp from './Doctors.comp'
 import PatientsComp from './Patients.comp'
 import SchedulesComp from './Schedules.comp'
+
+import StoreItemAddComp from './StoreItemAddNew.comp'
+import StoreItemBuyComp from './StoreItemBuy.comp'
+import StoreItemSellComp from './StoreItemSell.comp'
+
 
 import { logoutAction } from '../actions'
 
@@ -77,10 +86,13 @@ const HomeContainerComp = ()=>{
     const onDoctors = ()=> setActiveViewName('doctors')
     const onPatients = ()=> setActiveViewName('patients')
     const onSchedules = ()=> setActiveViewName('schedules')
+    const onBuyItem = ()=> setActiveViewName('buyItem')
+    const onSellItem = ()=> setActiveViewName('sellItem')
+    const onAddNewItem = ()=> setActiveViewName('addNewItem')
     const onLogout = ()=> dispatch( logoutAction() )
     
     const renderViewComponent = (viewName)=>{
-        // profile, doctors, patients, schedules
+        // profile, doctors, patients, schedules, buyItem, sellItem, addNewItem  
         switch (viewName){
             case 'profile' :
                 return(<ProfileComp />)
@@ -90,6 +102,12 @@ const HomeContainerComp = ()=>{
                 return(<PatientsComp />)
             case 'schedules' :
                 return(<SchedulesComp />)
+            case 'buyItem' :
+                return (<StoreItemBuyComp />)
+            case 'sellItem' :
+                return(<StoreItemSellComp />)
+            case 'addNewItem' :
+                return (<StoreItemAddComp />)
             default :
                 return(<HomeDefaultComp />)
 
@@ -129,6 +147,19 @@ const HomeContainerComp = ()=>{
                     <ListItem button key={'schedules'} onClick={ onSchedules }> 
                         <ListItemIcon> <ScheduleIcon /> </ListItemIcon>
                         <ListItemText primary='Schedules' /> 
+                    </ListItem>
+                    <Divider />
+                    <ListItem button key={'buyItem'} onClick={ onBuyItem }> 
+                        <ListItemIcon> <ShoppingCartIcon /> </ListItemIcon>
+                        <ListItemText primary='Buy' /> 
+                    </ListItem>
+                    <ListItem button key={'sellItem'} onClick={ onSellItem }> 
+                        <ListItemIcon> <StorefrontIcon /> </ListItemIcon>
+                        <ListItemText primary='Sell' /> 
+                    </ListItem>
+                    <ListItem button key={'addNewItem'} onClick={ onAddNewItem }> 
+                        <ListItemIcon> <PlaylistAddIcon /> </ListItemIcon>
+                        <ListItemText primary='New Item' /> 
                     </ListItem>
                     <Divider />
                     <ListItem button key={'logout'} onClick={ onLogout }> 

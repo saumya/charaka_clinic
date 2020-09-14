@@ -4,12 +4,16 @@ const apiObj = {
     version : '/v1',
     /* =============================== POST ================================== */
     post: {
-        loginClinic: '/loginClinic',
-        loginDoctor: '/loginDoctor',
+        loginClinic : '/loginClinic',
+        loginDoctor : '/loginDoctor',
         create_prescription : '/createPrescription',
         create_doctor : '/createDoctor',
         assign_doctor_to_clinic : '/assignDoctorToClinic',
-        create_patient : '/createPerson'
+        create_patient : '/createPerson',
+
+        create_new_store_item : '/crateItem',
+        buy_item : '/createItemBought',
+        sell_item : '/createItemSold',
     },
     /* =============================== PUT ================================== */
     put: {
