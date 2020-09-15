@@ -31,3 +31,97 @@ export const createNewStoreItem_action = newItem =>(
 )
 
 // ========= createNewStoreItem_action / ===============================================
+
+// ========= getAllStoreItems_action  ===============================================
+const call_GetAllStoreItems_API = ()=>{
+    const url_1 = ApiObj.endpoint + ApiObj.version + ApiObj.get.all_storeItems
+    const fetch_data = { method: 'GET', mode: 'cors', headers: new Headers({ 'Content-Type': 'application/json' }) }
+    return fetch(url_1, fetch_data)
+}
+export const getAllStoreItems_action = ()=>(
+    dispatch=>{
+        call_GetAllStoreItems_API().then( success=>{
+
+            success.json().then( result=>{
+                console.log('RESULT', result)
+                dispatch( updateAllStoreItems(result) )
+            }, error_2=>{
+                console.log('call_GetAllStoreItems_API : ERROR 2 :')
+                console.log( error_2 )
+            })
+
+        }, error_1=>{
+            console.log('call_GetAllStoreItems_API : ERROR 1 :')
+            console.log(error_1)
+        })
+    }
+)
+// ========= getAllStoreItems_action / ===============================================
+
+const updateAllStoreItems = storeItems=>({ type: 'UPDATE_ALL_STORE_ITEMS', payload: storeItems })
+
+
+// ========================= BUY ==================================
+const call_createBuyItemAPI = (newBuy)=>{
+    const url_1 = ApiObj.endpoint + ApiObj.version + ApiObj.post.buy_item
+    const fetch_data = {
+        method: 'POST', 
+        mode: 'cors', headers: new Headers({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify(newBuy)
+    }
+    return fetch(url_1,fetch_data)
+}
+export const createNewBuy_action = (newBuy)=>(
+    dispatch => {
+
+        call_createBuyItemAPI(newBuy).then( success=>{
+            
+            success.json().then( result=>{
+                console.log('RESULT', result)
+                //dispatch( updateAllStoreItems(result) )
+            }, error_2=>{
+                console.log('call_GetAllStoreItems_API : ERROR 2 :')
+                console.log( error_2 )
+            })
+
+        }, error_1=>{
+            console.log('call_createBuyItemAPI : ERROR 1 :')
+            console.log( error_1 )
+        })
+
+    }
+)
+
+// ========================= BUY / ================================
+
+// ========================= SELL ====================================
+const call_createSellItemAPI = (newSell)=>{
+    const url_1 = ApiObj.endpoint + ApiObj.version + ApiObj.post.sell_item
+    const fetch_data = {
+        method: 'POST', 
+        mode: 'cors', headers: new Headers({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify(newSell)
+    }
+    return fetch(url_1,fetch_data)
+}
+export const createNewSell_action = (newSell)=>(
+    dispatch => {
+
+        call_createSellItemAPI(newSell).then( success=>{
+            
+            success.json().then( result=>{
+                console.log('RESULT', result)
+                //dispatch( updateAllStoreItems(result) )
+            }, error_2=>{
+                console.log('call_GetAllStoreItems_API : ERROR 2 :')
+                console.log( error_2 )
+            })
+
+        }, error_1=>{
+            console.log('call_createBuyItemAPI : ERROR 1 :')
+            console.log( error_1 )
+        })
+
+    }
+)
+// ========================= SELL / ==================================
