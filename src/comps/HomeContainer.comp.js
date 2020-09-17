@@ -31,6 +31,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import StorefrontIcon from '@material-ui/icons/Storefront'
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd'
+import AccountTreeIcon from '@material-ui/icons/AccountTree'
 
 import HomeDefaultComp from './HomeDefault.comp'
 import ProfileComp from './Profile.comp'
@@ -41,6 +42,7 @@ import SchedulesComp from './Schedules.comp'
 import StoreItemAddComp from './StoreItemAddNew.comp'
 import StoreItemBuyComp from './StoreItemBuy.comp'
 import StoreItemSellComp from './StoreItemSell.comp'
+import StoreReportComp from './StoreReport.comp'
 
 
 import { logoutAction } from '../actions'
@@ -89,6 +91,7 @@ const HomeContainerComp = ()=>{
     const onBuyItem = ()=> setActiveViewName('buyItem')
     const onSellItem = ()=> setActiveViewName('sellItem')
     const onAddNewItem = ()=> setActiveViewName('addNewItem')
+    const onStoreItemDetailsView = ()=> setActiveViewName('viewStoreItemDetails')
     const onLogout = ()=> dispatch( logoutAction() )
     
     const renderViewComponent = (viewName)=>{
@@ -108,6 +111,8 @@ const HomeContainerComp = ()=>{
                 return(<StoreItemSellComp />)
             case 'addNewItem' :
                 return (<StoreItemAddComp />)
+            case 'viewStoreItemDetails' :
+                return(<StoreReportComp />)
             default :
                 return(<HomeDefaultComp />)
 
@@ -160,6 +165,10 @@ const HomeContainerComp = ()=>{
                     <ListItem button key={'addNewItem'} onClick={ onAddNewItem }> 
                         <ListItemIcon> <PlaylistAddIcon /> </ListItemIcon>
                         <ListItemText primary='New Item' /> 
+                    </ListItem>
+                    <ListItem button key={'viewStoreItemDetails'} onClick={ onStoreItemDetailsView }> 
+                        <ListItemIcon> <AccountTreeIcon /> </ListItemIcon>
+                        <ListItemText primary='View Details' /> 
                     </ListItem>
                     <Divider />
                     <ListItem button key={'logout'} onClick={ onLogout }> 

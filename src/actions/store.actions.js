@@ -125,3 +125,27 @@ export const createNewSell_action = (newSell)=>(
     }
 )
 // ========================= SELL / ==================================
+
+// ========================= Item Transaction Details ====================================
+const updateBuySellDetails = result=>({ type: 'UPDATE_IN_OUT_DETAILS', payload: result })
+const call_transactionsOfItem_api = (itemId)=>{
+    const url_1 = ApiObj.endpoint + ApiObj.version + ApiObj.get.all_transactions_of_item_with_id + itemId
+    const fetch_data = { method: 'GET', mode: 'cors', headers: new Headers({ 'Content-Type': 'application/json' }) }
+    return fetch(url_1, fetch_data)
+}
+export const getTransactionsOfItemId_action = (itemId)=>(
+    dispatch => {
+        call_transactionsOfItem_api(itemId).then( success=>{
+
+            success.json().then( result=>{
+                console.log('RESULT', result)
+                dispatch( updateBuySellDetails(result) )
+            }, error_2=>{
+                console.log('call_transactionsOfItem_api : ERROR 2 :')
+                console.log( error_2 )
+            })
+
+        }, error_1=>console.log('error_1 : ', error_1) )
+    }
+)
+// ========================= Item Transaction Details / ==================================

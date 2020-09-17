@@ -29,6 +29,7 @@ const apiObj = {
         all_doctors_by_clinic_id : '/getAllDoctorsByGroup/',
         all_patients: '/getAllPeople',
         all_storeItems: '/getAllStoreItems',
+        all_transactions_of_item_with_id: '/getBuySellDetailsOfItemWithId/',
         
         all_schedules_by_doctor_id : '/getSchedulesByDoctorId/',
         get_person_with_id : '/getPersonWithId/',
