@@ -72,7 +72,7 @@ const StoreItemReportComp = (props)=>{
                         <ArrowBackIosIcon />
                     </Button>
                     <Typography variant="h6" className={classes.title}>
-                        Item - {props.item.name}
+                        Item - {props.item.name} - Rs.{props.item.price}
                     </Typography>
                     {/*
                     <Button color="inherit" onClick={ onCloseClick }>
