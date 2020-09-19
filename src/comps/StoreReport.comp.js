@@ -9,6 +9,11 @@ import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+
 import Dialog from '@material-ui/core/Dialog'
 import Slide from '@material-ui/core/Slide'
 
@@ -79,11 +84,15 @@ const StoreReportComp = ()=>{
             <Container maxWidth="sm">
                 <Paper elevation={3} style={{padding:20}}>
                     <form style={{margin:'1em'}} noValidate autoComplete="off">
+                        <List component="nav">
                         {
                             storeData.storeItems.map( item=>(
-                                <Button key={item.id} fullWidth variant="outlined" color="primary" onClick={ ()=>setSelectedItem(item) }> {item.id}-{item.name}-{item.company}--{item.price} </Button>
+                                <ListItem button key={item.id} onClick={() => setSelectedItem(item) }>
+                                    <ListItemText variant="outlined" color="primary" primary={item.id+' - '+item.name+' - '+item.company+' -- '+item.price} />
+                                </ListItem>
                             ) )
                         }
+                        </List>
                     </form>
                 </Paper>
             </Container>

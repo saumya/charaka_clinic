@@ -115,7 +115,7 @@ const StoreItemReportComp = (props)=>{
                     <List component="nav">
                     {
                         props.bought.map(item=>(
-                            <ListItem key={item.id} button onClick={() => console.log('TODO: UX improvements') }>
+                            <ListItem button key={item.id} onClick={() => console.log('TODO: UX improvements') }>
                                 <ListItemText primary={item.bought_on + ' - '+ item.quantity} />
                             </ListItem>
                         ))
@@ -131,7 +131,7 @@ const StoreItemReportComp = (props)=>{
                     <List component="nav">
                     {
                         props.sold.map(item=>(
-                            <ListItem key={item.id} button onClick={() => console.log('TODO: UX improvements') }>
+                            <ListItem button key={item.id} onClick={() => console.log('TODO: UX improvements') }>
                                 <ListItemText primary={item.sold_on + ' - '+ item.quantity} />
                             </ListItem>
                         ))
