@@ -1,5 +1,5 @@
 //
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect, useDispatch, useSelector } from 'react-redux'
 
 import Container from '@material-ui/core/Container'
@@ -22,7 +22,8 @@ import Slide from '@material-ui/core/Slide'
 import ListSchedulesRow2Component from './ListSchedulesRow2.comp'
 import ScheduleDetailView from './ScheduleDetailView.comp'
 
-import { all_schedules_by_doctorId_action } from '../actions'
+import { all_doctors_on_clinic_action, 
+            all_schedules_by_doctorId_action } from '../actions'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="left" ref={ref} {...props} />;
@@ -31,6 +32,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const SchedulesComp = ()=>{
 
     const dispatch = useDispatch()
+
+    const loginData = useSelector( state=>state.loginData )
+    const clinicProfile = loginData.loginUser
+    const clinicId = clinicProfile.id
 
     const appMessages = useSelector( state=>state.messages )
     const clinicData = useSelector( state=>state.clinicData )
@@ -56,6 +61,10 @@ const SchedulesComp = ()=>{
         setDetailsObj( detailsObj )
         setOpen(true)
     }
+
+    useEffect( ()=>{
+        dispatch( all_doctors_on_clinic_action(clinicId) )
+    }, [doctors.length] )
 
     return(
         <React.Fragment>
