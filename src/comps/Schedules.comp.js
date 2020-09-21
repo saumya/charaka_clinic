@@ -37,6 +37,9 @@ const SchedulesComp = ()=>{
     const clinicProfile = loginData.loginUser
     const clinicId = clinicProfile.id
 
+    // This is used inside useEffect hook for limiting the call to just once
+    const isFirstTime = true
+
     const appMessages = useSelector( state=>state.messages )
     const clinicData = useSelector( state=>state.clinicData )
     const doctors = clinicData.doctors
@@ -64,7 +67,7 @@ const SchedulesComp = ()=>{
 
     useEffect( ()=>{
         dispatch( all_doctors_on_clinic_action(clinicId) )
-    }, [doctors.length] )
+    }, [ isFirstTime ] )
 
     return(
         <React.Fragment>
