@@ -8,11 +8,19 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+
+import LinearProgress from '@material-ui/core/LinearProgress'
+
 import { getAllStoreItems_action, createNewBuy_action } from '../actions'
 
 const StoreItemBuyComp = ()=>{
     const dispatch = useDispatch()
 
+    const appMessages = useSelector( state=> state.messages )
     const storeData = useSelector( state=>state.storeData )
 
     const [quantity, setQuantity] = useState('')
@@ -37,7 +45,7 @@ const StoreItemBuyComp = ()=>{
     return(
         <React.Fragment>
             <div>
-                <div> StoreItem Buy </div>
+                
                 <Container maxWidth="sm">
                     <Paper elevation={3} style={{padding:20}}>
                         
@@ -59,15 +67,22 @@ const StoreItemBuyComp = ()=>{
                         </form>
                         <div> Total cost - { selectedItem.price * quantity } </div>
                     </Paper>
+                    <LinearProgress color="secondary" variant={appMessages.isAppBusy ? "indeterminate" : "determinate" } value={0} />
                 </Container>
                 <Container maxWidth="sm">
                     <Paper elevation={3} style={{padding:20}}>
                         <form style={{margin:'1em'}} noValidate autoComplete="off">
+                        
+                            <List component="nav">
                             {
                                 storeData.storeItems.map( item=>(
-                                    <Button key={item.id} fullWidth variant="outlined" color="primary" onClick={ ()=>setSelectedItem(item) }> {item.id}-{item.name}-{item.company}--{item.price} </Button>
+                                    <ListItem button key={item.id} onClick={() => setSelectedItem(item) }>
+                                        <ListItemText variant="outlined" color="primary" primary={item.id+' - '+item.name+' - '+item.company+' -- '+item.price} />
+                                    </ListItem>
                                 ) )
                             }
+                            </List>
+
                         </form>
                     </Paper>
                 </Container>

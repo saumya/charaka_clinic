@@ -14,15 +14,15 @@ const call_CreateNewStoreItemAPI = (newItem)=>{
 }
 export const createNewStoreItem_action = newItem =>(
     dispatch => {
+        dispatch( changeBusyStatus(true) )
         call_CreateNewStoreItemAPI(newItem).then( success=>{
-            
             success.json().then( result=>{
+                dispatch( changeBusyStatus(false) )
                 console.log( result )
             }, error_2=>{
                 console.log('call_CreateNewStoreItemAPI : ERROR 2 :')
                 console.log( error_2 )
             })
-
         }, error_1=>{
             console.log('call_CreateNewStoreItemAPI : ERROR 1 :')
             console.log( error_1 )
@@ -41,7 +41,6 @@ const call_GetAllStoreItems_API = ()=>{
 export const getAllStoreItems_action = ()=>(
     dispatch=>{
         call_GetAllStoreItems_API().then( success=>{
-
             success.json().then( result=>{
                 console.log('RESULT', result)
                 dispatch( updateAllStoreItems(result) )
@@ -49,7 +48,6 @@ export const getAllStoreItems_action = ()=>(
                 console.log('call_GetAllStoreItems_API : ERROR 2 :')
                 console.log( error_2 )
             })
-
         }, error_1=>{
             console.log('call_GetAllStoreItems_API : ERROR 1 :')
             console.log(error_1)
@@ -73,17 +71,16 @@ const call_createBuyItemAPI = (newBuy)=>{
 }
 export const createNewBuy_action = (newBuy)=>(
     dispatch => {
-
+        dispatch( changeBusyStatus(true) )
         call_createBuyItemAPI(newBuy).then( success=>{
-            
             success.json().then( result=>{
+                dispatch( changeBusyStatus(false) )
                 console.log('RESULT', result)
                 //dispatch( updateAllStoreItems(result) )
             }, error_2=>{
                 console.log('call_GetAllStoreItems_API : ERROR 2 :')
                 console.log( error_2 )
             })
-
         }, error_1=>{
             console.log('call_createBuyItemAPI : ERROR 1 :')
             console.log( error_1 )
@@ -106,22 +103,20 @@ const call_createSellItemAPI = (newSell)=>{
 }
 export const createNewSell_action = (newSell)=>(
     dispatch => {
-
+        dispatch( changeBusyStatus(true) )
         call_createSellItemAPI(newSell).then( success=>{
-            
             success.json().then( result=>{
+                dispatch( changeBusyStatus(false) )
                 console.log('RESULT', result)
                 //dispatch( updateAllStoreItems(result) )
             }, error_2=>{
                 console.log('call_GetAllStoreItems_API : ERROR 2 :')
                 console.log( error_2 )
             })
-
         }, error_1=>{
             console.log('call_createBuyItemAPI : ERROR 1 :')
             console.log( error_1 )
         })
-
     }
 )
 // ========================= SELL / ==================================
@@ -136,7 +131,6 @@ const call_transactionsOfItem_api = (itemId)=>{
 export const getTransactionsOfItemId_action = (itemId)=>(
     dispatch => {
         call_transactionsOfItem_api(itemId).then( success=>{
-
             success.json().then( result=>{
                 console.log('RESULT', result)
                 dispatch( updateBuySellDetails(result) )
@@ -144,7 +138,6 @@ export const getTransactionsOfItemId_action = (itemId)=>(
                 console.log('call_transactionsOfItem_api : ERROR 2 :')
                 console.log( error_2 )
             })
-
         }, error_1=>console.log('error_1 : ', error_1) )
     }
 )
