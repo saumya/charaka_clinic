@@ -40,6 +40,11 @@ const StoreItemBuyComp = ()=>{
                 <div> StoreItem Buy </div>
                 <Container maxWidth="sm">
                     <Paper elevation={3} style={{padding:20}}>
+                        
+                        <form style={{margin:'1em'}} noValidate autoComplete="off">
+                            <Typography variant="h4"> Buy </Typography>
+                        </form>
+
                         <form style={{margin:'1em'}} noValidate autoComplete="off">
                             <Typography variant="h6"> { selectedItem.name + '-' + selectedItem.company } </Typography>
                         </form>
@@ -66,6 +71,8 @@ const StoreItemBuyComp = ()=>{
                         </form>
                     </Paper>
                 </Container>
+
+                <div style={{marginBottom:'5em'}} /> 
 
                 
                 {/* JSON.stringify(storeData.storeItems) */}
