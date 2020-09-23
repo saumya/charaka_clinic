@@ -65,22 +65,7 @@ const StoreReportComp = ()=>{
             {/* JSON.stringify(storeData.itemBought) */}
             {/* JSON.stringify(storeData.itemSold) */}
 
-            <Container maxWidth="sm">
-                <Paper elevation={3} style={{padding:20}}>
-                    { selectedItem.id }-{ selectedItem.name }
-                    {/*
-                    <form style={{margin:'1em'}} noValidate autoComplete="off">
-                        <TextField label="Item Id" variant="outlined" fullWidth onChange={ event => setItemId(event.target.value)  } />
-                    </form>
-                    <form style={{margin:'1em'}} noValidate autoComplete="off">
-                        <TextField type="date" variant="outlined" fullWidth onChange={ event => setTheDate(event.target.value)  } />
-                    </form>
-                    */}
-                    <form style={{margin:'1em'}} noValidate autoComplete="off">
-                        <Button variant="outlined" color="primary" onClick={()=>(onShowDetails()) }> Show Details </Button>
-                    </form>
-                </Paper>
-            </Container>
+            
             <Container maxWidth="sm">
                 <Paper elevation={3} style={{padding:20}}>
                     <form style={{margin:'1em'}} noValidate autoComplete="off">
@@ -96,6 +81,18 @@ const StoreReportComp = ()=>{
                     </form>
                 </Paper>
             </Container>
+            <Container maxWidth="sm">
+                <Paper elevation={3} style={{padding:20}}>
+                    <form style={{margin:'1em'}} noValidate autoComplete="off">
+                        {/* selectedItem.id */}
+                        <Typography variant="h6"> { selectedItem.name } - { selectedItem.price } /- </Typography>
+                    </form>
+                    <form style={{margin:'1em'}} noValidate autoComplete="off">
+                        <Button variant="outlined" color="primary" onClick={()=>(onShowDetails()) }> Show Details </Button>
+                    </form>
+                </Paper>
+            </Container>
+
         </React.Fragment>
     )
 }
