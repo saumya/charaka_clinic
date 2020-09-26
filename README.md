@@ -10,7 +10,11 @@ This is one of the modules of a large application.
 
 
 
-Made with [React][1] 
+### Technology
+
+ - [ReactJS][react]
+ - [Redux][redux]
+ - [Material UI][mui]
 
 
 
@@ -23,6 +27,6 @@ Made with [React][1]
 
 
 
-
-
-[1]: https://reactjs.org/
+[react]: https://reactjs.org
+[redux]: https://redux.js.org/
+[mui]: https://material-ui.com
