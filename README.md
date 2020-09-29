@@ -9,6 +9,11 @@ This is one of the modules of a large application.
  - [x] View and Add Doctors
 
 
+### WIP
+
+ Checking the UI and functionality. Working on the UX and functionality improvements.
+
+
 
 ### Technology
 
